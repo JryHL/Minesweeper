@@ -34,6 +34,7 @@ public class Board {
 		//mines may have nonzero neighbors, so this must be checked first
 		//game over if a mine is revealed
 		if (squares[x][y].isMine) {
+			
 			for(int i = 0; i < boardSize; i++) {
 				for(int j = 0; j < boardSize; j++) {
 					squares[i][j].isRevealed = true;
@@ -51,7 +52,7 @@ public class Board {
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
 					//must be within bounds; must not double-trigger current square
-					if (i >= 0 && j >= 0 && i < boardSize && j < boardSize && i != x && j != y) {
+					if (i >= 0 && j >= 0 && i < boardSize && j < boardSize && !(i == x && j == y)) {
 						//if already revealed, don't recursively call
 						if (!squares[i][j].isRevealed) {
 							reveal(i,j);
@@ -69,12 +70,17 @@ public class Board {
 	 */
 	public String toString() {
 		String string  = "";
+
+		for (int i = 0; i < boardSize; i++) {
+			string += i < 10 ? (i + " ") : i;
+		}
+		string += "\n";
 		//reverse i, j so that it is row by row
 		for (int j = 0; j < boardSize; j++) {
 			for (int i = 0; i < boardSize; i++) {
 				string += squares[i][j].toString();
 			}
-			string += "\n";
+			string += " " + j + "\n";
 		}
 		return string;
 	}
@@ -108,7 +114,7 @@ public class Board {
 				for (int x = i - 1; x <= i + 1; x++) {
 					for (int y = j - 1; y <= j + 1; y++) {
 						//x,y must be within bounds; must not double-count current square
-						if (x >= 0 && y >= 0 && x < boardSize && y < boardSize && x != i && y != j) {
+						if (x >= 0 && y >= 0 && x < boardSize && y < boardSize && !(x == i && y == j)) {
 							if (squares[x][y].isMine) {
 								neighboringMines++;
 							}
@@ -146,7 +152,7 @@ public class Board {
 				}
 			} else {
 				if (isMine) {
-					return "💣 ";
+					return "M ";
 				}
 				if (mineNeighbors == 0) {
 					return ". ";

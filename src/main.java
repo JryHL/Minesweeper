@@ -31,7 +31,16 @@ public class main {
 		Board board = new Board(boardSize);
 		
 		while(true) {
-			
+			try {
+				System.out.print(board.toString());
+				System.out.println("Input x coordinate");
+				int x = sc.nextInt();
+				System.out.println("Input y coordinate");
+				int y = sc.nextInt();
+				board.reveal(x, y);
+			} catch(Exception e) {
+				System.out.println("Input was not valid, try again.");
+			}
 		}
 		
 		
