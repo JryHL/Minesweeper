@@ -38,6 +38,11 @@ public class main {
 				System.out.println("Input y coordinate");
 				int y = sc.nextInt();
 				board.reveal(x, y);
+				if (board.gameOver) {
+					System.out.print(board.toString());
+					System.out.println("Game over!");
+					break;
+				}
 			} catch(Exception e) {
 				System.out.println("Input was not valid, try again.");
 			}

@@ -10,7 +10,7 @@ public class Board {
 	private Square[][] squares; //array of references to Squares representing the board
 	private int boardSize; //separate integer to avoid having to access array length.
 	private Random rng = new Random();
-	private boolean gameOver = false;
+	public boolean gameOver = false;
 	
 	/**
 	 * Creates and populates a Board object with the given board size. 
